@@ -1,0 +1,159 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 20px;
+            color: white;
+            margin-top: 80px;
+            background: #000000;
+            /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #434343, #000000);
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #434343, #000000);
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        }
+
+        input {
+            padding: 5px;
+            height: 30px;
+            width: 30vmax;
+            font-size: 20;
+            border-radius: 5px;
+            border: 1px solid grey;
+            min-width: 240px;
+            max-width: 260px;
+            margin-bottom: 10px;
+        }
+
+        label {
+            position: relative;
+            top: 4px;
+            width: 164px;
+            float: left;
+        }
+
+        #content-wrapper {
+            width: 424px;
+            margin: 0 auto;
+        }
+
+        .form-element {
+            margin-bottom: 10px;
+        }
+
+        input[type=submit] {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            text-decoration: none;
+            margin-left: 165px;
+            cursor: pointer;
+            width: 100px;
+            min-width: 100px;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
+    </script>
+
+</head>
+
+<body>
+    <div id="content-wrapper">
+        <h2>Form Validation</h2>
+        <div class="form-element">
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" placeholder="eg.yourname@gmail.com">
+        </div>
+        <div class="form-element">
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password">
+        </div>
+        <div class="form-element">
+            <label for="phone">Telephone</label>
+            <input type="text" name="phone" id="phone" placeholder="eg.0123456789">
+        </div>
+        <div class="form-element">
+            <label for="passwordConfirm">Password confirm</label>
+            <input type="password" name="passwordConfirm" id="passwordConfirm">
+        </div>
+        <div class="form-element">
+            <label for="passwordConfirm"></label>
+            <input type="submit" id="submitButton" value="sign up">
+        </div>
+        <!-- needs to be fixed     
+        <a href="mailto:email@address.com?subject=Hello world&body=Line one%0DLine two">Email me</a>
+-->
+    </div>
+    <script type="text/javascript">
+        function isEmail(email) {
+            var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+
+            return regex.test(email);
+        }
+
+
+        function isno(phone) {
+            var filter =
+                /^((\+[1-9]{1,4}[ \-]*)|(\([0-9]{2,3}\)[ \-]*)|([0-9]{2,4})[ \-]*)*?[0-9]{3,4}?[ \-]*[0-9]{3,4}?$/;
+            if (filter.test(phone)) {
+                if (phone.length == 10) {
+                    var validate = true;
+                } else {
+                    alert('Please put 10  digit mobile number');
+                    var validate = false;
+                }
+            } else {
+                alert('Not a valid number');
+                var validate = false;
+            }
+
+        }
+
+
+        $("#submitButton").click(function () {
+
+            var errorMessage = "";
+            var fieldMissing = "";
+            if ($("#email").val() == null) {
+                fieldMissing += "<br>Email";
+            }
+            if ($("#phone").val() == null) {
+                fieldMissing += "<br>Phone";
+            }
+
+            if ($("#password").val() == null) {
+                fieldMissing += "<br>password";
+            }
+
+            if ($("#passwordConfirm").val() == null) {
+                fieldMissing += "<br>confirm password";
+            }
+            if (fieldMissing != "") {
+                errorMessage += "<p>the following fields are missing" + fieldMissing;
+            }
+
+            if (isEmail($("#email").val()) == false) {
+                errorMessage += "<p>Your email address is not valid</p>";
+
+            }
+            if (isno($("#phone").val()) == false) {
+
+
+            }
+            if ($("#password").val() != $("#passwordConfirm").val()) {
+                errorMessage += "<p>Your password dont match</p>";
+            }
+            if (errorMessage == "")
+                errorMessage += "Your data was successfuly sent";
+            alert(errorMessage);
+        });
+    </script>
+</body>
+
+</html>
