@@ -1,0 +1,166 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+    <style type="text/css">
+        body,
+        html {
+            background: #141E30;
+            /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #243B55, #141E30);
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #243B55, #141E30);
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            font-family: 'Quicksand', sans-serif;
+
+            font-weight: 10px;
+            font-size: 22px;
+        }
+
+        h1 {
+            color: white;
+            text-align: center;
+            padding-top: 60px;
+        }
+
+        #box-1 {
+            background-color: red;
+            margin-left: 50%;
+            transform: translateX(-50%);
+            display: none;
+        }
+
+        #box-2 {
+            background-color: green;
+            display: none;
+            margin-left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #container {
+            padding: 30 10 0 35;
+            background-color: white;
+            width: 50%;
+            height: 50%;
+            margin: 30 auto;
+            border: 1px solid black;
+            border-radius: 20px;
+        }
+
+        input {
+            font-family: 'Quicksand', sans-serif;
+            border-radius: 5px;
+            border: 1px solid black;
+            margin-bottom: 10px;
+            outline: none;
+            padding: 5px;
+        }
+
+        label {
+            width: 164px;
+            float: left;
+        }
+
+        select {
+            font-family: 'Quicksand', sans-serif;
+            border-radius: 5px;
+            border: 1px solid black;
+            margin-bottom: 15px;
+            width: 150px;
+            height: 30px;
+        }
+
+        #SubmitButton {
+            background-color: #4CAFA0;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 80%;
+        }
+
+        #SubmitButton:hover {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Responser Box</h1>
+    <div id="container">
+        <form>
+            <label for="width">Select Box:</label>
+            <input type="radio" name="Box" value="box-1" id="r1"> Box 1
+            <input type="radio" name="Box" value="box-2" id="r2"> Box2<br>
+            <label for="color">Color:</label>
+            <select name="color" id="color">
+                <option value="red" id="red">Red</option>
+                <option value="green" id="green">Green</option>
+                <option value="blue" id="blue">Blue</option>           
+            </select><br>
+            <label for="width">Width:</label>
+            <input type="text" name="text" id="width" pattern="[0-9]" placeholder="50px"><br>
+            <label for="width">Height:</label>
+            <input type="text" name="text" id="height" placeholder="50px"><br/>
+            <input type="button" onclick="change()" id="submitButton" value="Submit">
+        </form>
+    </div>
+
+    <div class="box" id="box-1">Box1</div>
+    <br/>
+    <div class="box" id="box-2">Box2</div>
+    <script sc="javascript/text">
+        function change(form) {
+            var flag = 0;
+            var message = "";
+            var rate_value;
+            if (document.getElementById('r1').checked) {
+                rate_value = document.getElementById('r1').value;
+            } else if (document.getElementById('r2').checked) {
+                rate_value = document.getElementById('r2').value;
+            } else {
+                message += "Select Something!!!";
+            }
+            var selectedText = color.options[color.selectedIndex].innerHTML;
+            var selectedValue = color.value;
+            if (selectedValue == "" || selectedValue == null) {
+                message += "Select some color!!";
+            }
+            //  alert("Selected Text: " + selectedText + " Value: " + selectedValue);
+            var width = document.getElementById("width").value;
+            if (width == null || width == 0) {
+                message += "Enter width size!!";
+            }
+            if (isNaN(width)) {
+                message += " WIDTH IS NOT A NUMBER!!";
+                flag = 1;
+            }
+            // alert(width);
+            var height = document.getElementById("height").value;
+            if (height == null || height == 0) {
+                message += "Enter height size!!";
+            }
+            if (isNaN(height)) {
+                message += "HEIGHT IS NOT A NUMBER!!";
+                flag = 1;
+            }
+            if (message != "") {
+                alert(message);
+                location.reload();
+            } else if (flag == 0) {
+                document.getElementById(rate_value).style.background = selectedValue;
+                document.getElementById(rate_value).style.width = width;
+                document.getElementById(rate_value).style.height = height;
+                document.getElementById(rate_value).style.display = "block";
+            }
+        }
+    </script>
+</body>
+
+</html>
